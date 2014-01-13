@@ -9,6 +9,9 @@ $( document ).ready(function() {
       url: $form.attr('action'),
       dataType: 'json',
       success: function(meow) {
+        // Find the parent wrapper div so we can use its data-post-id
+        $post = $form.closest('[data-post-id]');
+
         // create string version of form action
         action = '/posts/'+meow.post_id+'/meows/'+meow.id;
 
@@ -27,6 +30,10 @@ $( document ).ready(function() {
 
         // replace old form w/ new form
         $form.replaceWith($newForm);
+
+        // update meow count
+        $meowCount = $post.find('[data-meow-count]');
+        $meowCount.replaceWith('<p data-meow-count="1">1 Meow</p>');
       }
     });
   }); // why did we change the target here?
@@ -63,6 +70,10 @@ $( document ).ready(function() {
 
         // replace old form with new form
         $form.replaceWith($newForm);
+
+        // update meow count
+        $meowCount = $post.find('[data-meow-count]');
+        $meowCount.replaceWith('<p data-meow-count="0">0 Meows</p>');
       }
     });
   });
