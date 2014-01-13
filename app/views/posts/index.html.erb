@@ -12,7 +12,7 @@
       <%= button_to "Remove Meow", post_meow_path(post, post.meow_from(current_user)),
         method: :delete%>
     <% else %>
-      <%= button_to "Meow", post_meows_path(post), method: :post %>
+      <%= button_to "Meow", post_meows_path(post), method: :post, form: { data: { 'meow-button' => 'create' } } %>
     <% end %>
   <% end %>
 
