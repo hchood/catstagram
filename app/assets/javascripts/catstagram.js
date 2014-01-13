@@ -73,7 +73,19 @@ $( document ).ready(function() {
 
         // update meow count
         $meowCount = $post.find('[data-meow-count]');
-        $meowCount.replaceWith('<p data-meow-count="0">0 Meows</p>');
+        var oldCount = $meowCount.data('meow-count');
+        var newCount = parseInt(oldCount, 10) - 1;
+
+        function pluralizeMeow(newCount) {
+          if (newCount === 1)
+            return 'Meow';
+          else
+            return 'Meows';
+        }
+
+        var meow = pluralizeMeow(newCount);
+        $meowCount.text(newCount+' '+meow);
+
       }
     });
   });
