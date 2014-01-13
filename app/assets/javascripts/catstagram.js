@@ -8,8 +8,25 @@ $( document ).ready(function() {
       type: "POST",
       url: $form.attr('action'),
       dataType: 'json',
-      success: function() {
-        alert("MEOW");
+      success: function(meow) {
+        // create string version of form action
+        action = '/posts/'+meow.post_id+'/meows/'+meow.id;
+
+        // create the new form
+        $newForm = $('<form>').attr({
+          action: action,
+          method: 'delete',
+          'data-meow-button': 'delete'
+        });
+
+        // create the new submit button
+        $meowButton = $('<input>').attr({type: 'submit', value: 'Remove Meow'});
+
+        // append button to form
+        $newForm.append($meowButton);
+
+        // replace old form w/ new form
+        $form.replaceWith($newForm);
       }
     });
   });
